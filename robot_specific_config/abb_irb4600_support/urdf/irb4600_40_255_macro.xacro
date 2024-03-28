@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="abb_irb4600_40_255" params="prefix">
     <xacro:include filename="$(find abb_resources)/urdf/common_materials.xacro"/>
+    <xacro:include filename="$(find abb_irb4600_support)/urdf/irb4600.inertial_macro.xacro"/>
 
     <!-- link list -->
     <link name="${prefix}base_link">
@@ -17,6 +18,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.275" length="0.18" mass="30.28">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_1">
       <collision name="collision">
@@ -31,6 +35,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.23" length="0.48" mass="42.41">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_2">
       <collision name="collision">
@@ -45,6 +52,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.06" length="1.32" mass="34.32">
+        <origin xyz="0 0 0.65" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_3">
       <collision name="collision">
@@ -59,6 +69,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.175" length="0.52" mass="51.16">
+        <origin xyz="0 0 0.175" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_4">
       <collision name="collision">
@@ -73,6 +86,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.08" length="1.03" mass="13.95">
+        <origin xyz="0.8 0 0" rpy="0 ${80} 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_5">
       <collision name="collision">
@@ -87,6 +103,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.08" length="0.23" mass="1.5">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_6">
       <collision name="collision">
@@ -101,6 +120,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.02" length="0.06" mass="0.27">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <!-- end of link list -->
 
