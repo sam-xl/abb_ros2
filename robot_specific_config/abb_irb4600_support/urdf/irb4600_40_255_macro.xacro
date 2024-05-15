@@ -134,7 +134,8 @@
       <axis xyz="0 0 1"/>
       <parent link="${prefix}base_link"/>
       <child link="${prefix}link_1"/>
-      <!-- effort = -1 implies no limit, 0 will prevent any control -->
+      <!-- effort = -1 is interpreted as the default max effort, 
+      on the otherhand 0 max effort will prevent effort ouputs from reaching the virtual joint -->
       <limit effort="-1" lower="${radians(-180)}" upper="${radians(180)}" velocity="${radians(175)}"/>
     </joint>
     <joint type="revolute" name="${prefix}joint_2">
