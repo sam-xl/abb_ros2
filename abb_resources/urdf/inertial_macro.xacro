@@ -3,6 +3,7 @@
   <!--
     NOTE: the macro defined here is copied from Universal Robots/ur_description package
     https://github.com/ros-industrial/universal_robot/blob/1c719dd15b79ae83a5bd6c1be46d712cbbf129ec/ur_description/urdf/inc/ur_common.xacro#L11-L19
+   * Software License Agreement (BSD License)
   -->
   <xacro:macro name="cylinder_inertial" params="radius length mass *origin">
     <inertial>
