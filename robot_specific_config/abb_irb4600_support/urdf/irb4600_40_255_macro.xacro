@@ -89,7 +89,7 @@
         <xacro:material_abb_graphite_white/>
       </visual>
       <xacro:cylinder_inertial radius="0.08" length="1.03" mass="13.95">
-        <origin xyz="0.8 0 0" rpy="0 ${80} 0" />
+        <origin xyz="0.8 0 0" rpy="0 ${radians(90)} 0" />
       </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_5">
