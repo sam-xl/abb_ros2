@@ -23,6 +23,9 @@
       in this package, be sure to check they are correct for the particular
       robot model and configuration you intend to use them with.
     </p>
+    <p>
+      All inertial values for each of the irb4600 links are retrieved/estimated from Solidworks.
+    </p>
   </description>
   <author>Jonathan Meyer (Southwest Research Institute)</author>
   <author>Rik Tonnaer (SAM|XL)</author>

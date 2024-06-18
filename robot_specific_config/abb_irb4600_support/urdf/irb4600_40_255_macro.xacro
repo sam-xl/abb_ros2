@@ -2,7 +2,10 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="abb_irb4600_40_255" params="prefix">
     <xacro:include filename="$(find abb_resources)/urdf/common_materials.xacro"/>
-
+    <xacro:include filename="$(find abb_resources)/urdf/inertial_macro.xacro"/>
+    <!--
+      All inertial values for each of the robot's links below are retrieved/estimated from Solidworks
+    -->
     <!-- link list -->
     <link name="${prefix}base_link">
       <collision name="collision">
@@ -17,6 +20,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.275" length="0.18" mass="30.28">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_1">
       <collision name="collision">
@@ -31,6 +37,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.23" length="0.48" mass="42.41">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_2">
       <collision name="collision">
@@ -45,6 +54,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.06" length="1.32" mass="34.32">
+        <origin xyz="0 0 0.65" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_3">
       <collision name="collision">
@@ -59,6 +71,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.175" length="0.52" mass="51.16">
+        <origin xyz="0 0 0.175" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_4">
       <collision name="collision">
@@ -73,6 +88,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.08" length="1.03" mass="13.95">
+        <origin xyz="0.8 0 0" rpy="0 ${radians(90)} 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_5">
       <collision name="collision">
@@ -87,6 +105,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.08" length="0.23" mass="1.5">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <link name="${prefix}link_6">
       <collision name="collision">
@@ -101,6 +122,9 @@
         </geometry>
         <xacro:material_abb_graphite_white/>
       </visual>
+      <xacro:cylinder_inertial radius="0.02" length="0.06" mass="0.27">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
     </link>
     <!-- end of link list -->
 
@@ -110,42 +134,44 @@
       <axis xyz="0 0 1"/>
       <parent link="${prefix}base_link"/>
       <child link="${prefix}link_1"/>
-      <limit effort="0" lower="${radians(-180)}" upper="${radians(180)}" velocity="${radians(175)}"/>
+      <!-- effort = -1 is interpreted as the default max effort, 
+      on the otherhand 0 max effort will prevent effort ouputs from reaching the virtual joint -->
+      <limit effort="-1" lower="${radians(-180)}" upper="${radians(180)}" velocity="${radians(175)}"/>
     </joint>
     <joint type="revolute" name="${prefix}joint_2">
       <origin xyz="0.175 0 0" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
       <parent link="${prefix}link_1"/>
       <child link="${prefix}link_2"/>
-      <limit effort="0" lower="${radians(-90)}" upper="${radians(150)}" velocity="${radians(175)}"/>
+      <limit effort="-1" lower="${radians(-90)}" upper="${radians(150)}" velocity="${radians(175)}"/>
     </joint>
     <joint type="revolute" name="${prefix}joint_3">
       <origin xyz="0 0 1.095" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
       <parent link="${prefix}link_2"/>
       <child link="${prefix}link_3"/>
-      <limit effort="0" lower="${radians(-180)}" upper="${radians(75)}" velocity="${radians(175)}"/>
+      <limit effort="-1" lower="${radians(-180)}" upper="${radians(75)}" velocity="${radians(175)}"/>
     </joint>
     <joint type="revolute" name="${prefix}joint_4">
       <origin xyz="0 0 0.175" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
       <parent link="${prefix}link_3"/>
       <child link="${prefix}link_4"/>
-      <limit effort="0" lower="${radians(-400)}" upper="${radians(400)}" velocity="${radians(250)}"/>
+      <limit effort="-1" lower="${radians(-400)}" upper="${radians(400)}" velocity="${radians(250)}"/>
     </joint>
     <joint type="revolute" name="${prefix}joint_5">
       <origin xyz="1.270 0 0" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
       <parent link="${prefix}link_4"/>
       <child link="${prefix}link_5"/>
-      <limit effort="0" lower="${radians(-125)}" upper="${radians(120)}" velocity="${radians(250)}"/>
+      <limit effort="-1" lower="${radians(-125)}" upper="${radians(120)}" velocity="${radians(250)}"/>
     </joint>
     <joint type="revolute" name="${prefix}joint_6">
       <origin xyz="0.135 0 0" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
       <parent link="${prefix}link_5"/>
       <child link="${prefix}link_6"/>
-      <limit effort="0" lower="${radians(-400)}" upper="${radians(400)}" velocity="${radians(360)}"/>
+      <limit effort="-1" lower="${radians(-400)}" upper="${radians(400)}" velocity="${radians(360)}"/>
     </joint>
     <!-- end of joint list -->
 
