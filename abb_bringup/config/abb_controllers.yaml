@@ -5,6 +5,9 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
+    force_torque_broadcaster:
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
@@ -43,3 +46,8 @@ forward_command_controller_position:
       - joint_5
       - joint_6
     interface_name: position
+
+force_torque_broadcaster:
+  ros__parameters:
+    sensor_name: ft_sensor
+    frame_id: tool0 # Should be updated to match location of FT sensor

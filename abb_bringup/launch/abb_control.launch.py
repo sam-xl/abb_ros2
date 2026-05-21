@@ -86,6 +86,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "ft_broadcaster",
+            default_value="false",
+            description="Set to true to broadcast force torque data if available.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "configure_via_rws",
             default_value="true",
             description="If false, the robot description will be generate from joint information \
@@ -124,6 +131,7 @@ def generate_launch_description():
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     rws_ip = LaunchConfiguration("rws_ip")
     rws_port = LaunchConfiguration("rws_port")
+    ft_broadcaster = LaunchConfiguration("ft_broadcaster")
     configure_via_rws = LaunchConfiguration("configure_via_rws")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
@@ -201,6 +209,17 @@ def generate_launch_description():
         ],
     )
 
+    force_torque_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "force_torque_broadcaster",
+            "--controller-manager",
+            "/controller_manager",
+        ],
+        condition=IfCondition(ft_broadcaster),
+    )
+
     initial_joint_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -212,6 +231,7 @@ def generate_launch_description():
         robot_state_publisher_node,
         rviz_node,
         joint_state_broadcaster_spawner,
+        force_torque_broadcaster_spawner,
         initial_joint_controller_spawner,
     ]
 

@@ -212,6 +212,25 @@ std::vector<hardware_interface::StateInterface> ABBSystemHardware::export_state_
   std::vector<hardware_interface::StateInterface> state_interfaces;
   for (auto& group : motion_data_.groups)
   {
+    // Check if the force control option is available
+    if (robot_controller_description_.has_system_indicators() &&
+        robot_controller_description_.system_indicators().has_options() &&
+        robot_controller_description_.system_indicators().options().has_forcecontrol() &&
+        robot_controller_description_.system_indicators().options().forcecontrol())
+    {
+      state_interfaces.emplace_back("ft_sensor", hardware_interface::HW_IF_FORCE + std::string{ ".x" },
+                                    &group.forcetorque.force.x);
+      state_interfaces.emplace_back("ft_sensor", hardware_interface::HW_IF_FORCE + std::string{ ".y" },
+                                    &group.forcetorque.force.y);
+      state_interfaces.emplace_back("ft_sensor", hardware_interface::HW_IF_FORCE + std::string{ ".z" },
+                                    &group.forcetorque.force.z);
+      state_interfaces.emplace_back("ft_sensor", hardware_interface::HW_IF_TORQUE + std::string{ ".x" },
+                                    &group.forcetorque.torque.x);
+      state_interfaces.emplace_back("ft_sensor", hardware_interface::HW_IF_TORQUE + std::string{ ".y" },
+                                    &group.forcetorque.torque.y);
+      state_interfaces.emplace_back("ft_sensor", hardware_interface::HW_IF_TORQUE + std::string{ ".z" },
+                                    &group.forcetorque.torque.z);
+    }
     for (auto& unit : group.units)
     {
       for (auto& joint : unit.joints)
